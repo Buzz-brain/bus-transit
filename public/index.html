@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Counting System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Passenger Counting System</h1>
+    <div style="position: relative; display: block;">
+        <video id="webcam" autoplay playsinline style="width: 640px; height: 480px; border: 1px solid black;"></video>
+        <canvas id="overlay" width="640" height="480" style="position: absolute; top: 0; left: 0;"></canvas>
+        <div id="count">People Count: <span id="countValue">0</span></div>
+    </div>
+
+    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <!-- Load the coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
