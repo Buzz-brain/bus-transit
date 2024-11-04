@@ -4,24 +4,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passenger Counting System</title>
+    <title>Passenger Monitoring System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>Passenger Counting System</h1>
-    <div style="position: relative; display: block;">
-        <video id="webcam" autoplay playsinline style="width: 640px; height: 480px; border: 1px solid black;"></video>
-        <canvas id="overlay" width="640" height="480" style="position: absolute; top: 0; left: 0;"></canvas>
-        <div id="count">People Count: <span id="countValue">0</span></div>
-    </div>
 
-    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
-    <!-- Load the coco-ssd model. -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Navbar -->
+    <header class="navbar">
+        <img src="logo.png" alt="Logo" class="logo">
+        <button class="btn btn-signup">Sign Up</button>
+        <button class="btn btn-login">Login</button>
+        <!-- <div class="menu-icon">&#9776;</div> -->
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-layer">
+            <div class="hero-content">
+                <h1>Efficient Public Transit Through Intelligent Passenger Monitoring</h1>
+                <p>Monitor passenger traffic at every bus stop in real-time and optimize routes for a smoother, more
+                    efficient transit experience.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-learn-more">Learn more</button>
+                    <button class="btn btn-login">Login</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <h2>Benefits</h2>
+        <p>Here are the key benefits of the IoT-based Passenger Counting and Notification System:</p>
+        <!-- <button class="btn btn-view-all">View All</button> -->
+        <div class="benefit-ctn">
+            <div class="benefit-card">
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="card-number">01</div>
+                    <a href="#" class="card-link">➔</a>
+                </div>
+                <div class="card-content">
+                    <h3>Real-Time Passenger Data</h3>
+                    <p>Provides up-to-the-minute passenger counts at each bus stop, allowing bus drivers to plan routes
+                        more efficiently.</p>
+                </div>
+            </div>
+            <div class="benefit-card">
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="card-number">02</div>
+                    <a href="#" class="card-link">➔</a>
+                </div>
+                <div class="card-content">
+                    <h3>Real-Time Passenger Data</h3>
+                    <p>Provides up-to-the-minute passenger counts at each bus stop, allowing bus drivers to plan routes
+                        more efficiently.</p>
+                </div>
+            </div>
+            <div class="benefit-card">
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="card-number">03</div>
+                    <a href="#" class="card-link">➔</a>
+                </div>
+                <div class="card-content">
+                    <h3>Real-Time Passenger Data</h3>
+                    <p>Provides up-to-the-minute passenger counts at each bus stop, allowing bus drivers to plan routes
+                        more efficiently.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <script>
+        const btnLogin = document.getElementsByClassName("btn-login");
+
+        for(i=0; i<btnLogin.length; i++) {
+            btnLogin[i].addEventListener("click", () => {
+            window.location.href = "/login.html";
+            })
+        }
+        
+    </script>
+
 </body>
 
 </html>

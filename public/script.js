@@ -1,3 +1,4 @@
+// script.js
 console.log("Script connected");
 
 const countDisplay = document.getElementById("countValue");
@@ -76,8 +77,10 @@ async function detectPeople() {
 
     // Update people count
     countDisplay.innerText = peopleCount;
+    
+    // Emit real-time passenger count to server
     socket.emit("passengerCount", { count: peopleCount });
-    console.log("People count:", peopleCount);
+    // console.log("People count:", peopleCount);
 
   } catch (error) {
     console.error("Error in detectPeople():", error);
@@ -98,7 +101,7 @@ async function main() {
     console.log("Webcam initialized in main()");
 
     // Start detection loop
-    setInterval(detectPeople, 5000); // Detect every second
+    setInterval(detectPeople, 5000); // Detect every 5 seconds
   } catch (error) {
     console.error("Error in main():", error);
   }

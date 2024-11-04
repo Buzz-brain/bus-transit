@@ -1,0 +1,19 @@
+/* public/style.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  video {
+    width: 400px;
+    height: auto;
+    margin: 20px 0;
+  }
+  
+  #count {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  

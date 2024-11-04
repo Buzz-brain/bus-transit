@@ -1,19 +1,178 @@
-/* public/style.css */
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
 body {
     font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    width: 40px;
+    margin-right: auto;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn-signup {
+    background-color: #fff;
+    color: #000;
+    margin-right: 10px;
+}
+
+.btn-login {
+    background-color: #f39c12;
+    color: #fff;
+    margin-right: 10px;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('jumbotron.png'); /* Replace with your hero image */
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    background-color: red;
+}
+.hero-layer {
+    width: 100%;
+    height: 100%;
+    padding: 100px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-learn-more {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Benefits Section */
+.benefits {
+    padding: 20px;
+}
+
+.benefits h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.benefits p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.btn-view-all {
+    background-color: #333;
+    color: #fff;
+    padding: 8px 20px;
+    font-size: 1rem;
+}
+
+.benefit-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  
-  video {
-    width: 400px;
-    height: auto;
-    margin: 20px 0;
-  }
-  
-  #count {
-    font-size: 1.5em;
+    /* align-items: center; */
+    background-color: #f8f8f8;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+.benefit-ctn {
+    display: flex; 
+    gap: 30px
+}
+
+.card-number {
+    font-size: 30px;
     font-weight: bold;
-  }
-  
+    color: #f39c12;
+    margin-right: 15px;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.card-content p {
+    font-size: 1rem;
+    color: #666;
+    margin: 5px 0;
+    margin-top: 12px;
+
+}
+
+.card-link {
+    font-size: 1.5rem;;
+    color: #ff6347;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 768px) {
+    .navbar {
+        justify-content: space-between;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .benefits h2, .benefit-card .card-content h3 {
+        font-size: 1.6rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 13px 30px;
+    }
+    .benefit-ctn {
+        flex-direction: column; 
+    }
+}
