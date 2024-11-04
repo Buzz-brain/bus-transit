@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Page</title>
+        <!-- Link to Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="map.css">
+</head>
+<body>
+        <!-- Navbar -->
+        <header class="navbar">
+            <img src="logo.png" alt="Logo" class="logo">
+            <button class="btn btn-signup">Sign Up</button>
+            <button class="btn btn-login">Login</button>
+            <!-- <div class="menu-icon">&#9776;</div> -->
+        </header>
+
+    <!-- Header with Back Button and Time -->
+    <header class="header">
+        <button class="back-button">BACK</button>
+        <div class="time-display">12:35 AM</div>
+    </header>
+
+    <!-- Map Container -->
+    <div class="map-container" id="map">
+        <!-- The interactive map will be displayed here -->
+    </div>
+
+    <!-- Congestion Status Legend -->
+    <div class="legend-container">
+        <h3>Congestion Status</h3>
+        <div class="legend-item">
+            <span class="color-box moderate"></span> Moderate
+        </div>
+        <div class="legend-item">
+            <span class="color-box high"></span> High
+        </div>
+        <div class="legend-item">
+            <span class="color-box normal"></span> Normal
+        </div>
+    </div>
+
+
+    <!-- Leaflet JavaScript library -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Set initial map center coordinates (longitude and latitude)
+        const longitude = -74.006; // Replace with actual longitude
+        const latitude = 40.7128;  // Replace with actual latitude
+        const longitude1 = -74.306; // Approximately 2 miles east
+        const latitude1 = 40.8328;
+        const longitude2 = -73.586; // Approximately 1 mile west
+        const latitude2 = 40.6928; // Approximately 1 mile south
+
+
+        // Initialize map
+        const map = L.map('map').setView([latitude, longitude], 10); // Replace latitude and longitude with initial center coordinates
+
+        // Load and display OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+
+
+        // Define bus stops with names and coordinates
+        const busStops = [
+            { name: "Eziobodo", coords: [latitude, longitude] },
+            { name: "Ihiagwa", coords: [latitude1, longitude1] },
+            { name: "Umuchima", coords: [latitude2, longitude2] },
+            // Add more bus stops with coordinates
+        ];
+
+        // Add markers for each bus stop on the map
+        const markers = busStops.map(stop => {
+            const color = stop.count > 20 ? "red" : stop.count > 10 ? "yellow" : "green";
+
+            const marker = L.marker(stop.coords, {
+                icon: L.divIcon({
+                    className: `marker-icon-${color}`,
+                    html: `<div style="background-color: ${color}; width: 20px; height: 20px; border-radius: 50%;"></div>`
+                })
+            }).addTo(map);
+
+            // Bind a tooltip that shows the stop name and passenger count without clicking
+            marker.bindTooltip(
+                `<strong>${stop.name}</strong><br>Passenger Count: ${stop.count}`,
+                { permanent: true, direction: "top", offset: [0, -10] }
+            );
+
+            marker.stopName = stop.name;
+            return marker;
+        });
+
+
+        // Connect to the socket
+        const socket = io();
+
+        // Listen for passenger count updates
+        socket.on("updateCount", (data) => {
+            // Update your dashboard with the received count
+            data.forEach(update => {
+                const marker = markers.find(m => m.stopName === update.stopName);
+
+                console.log('Received update count:', update.count, update.stopName);
+
+                if (marker) {
+                    // Update color based on count
+                    const color = update.count > 20 ? "red" : update.count > 10 ? "yellow" : "green";
+                    marker.setIcon(L.divIcon({
+                        className: `marker-icon-${color}`,
+                        html: `<div style="background-color: ${color}; width: 20px; height: 20px; border-radius: 50%;"></div>`
+                    }));
+                    // Update tooltip content to reflect new passenger count
+                    marker.setTooltipContent(`<strong>${update.stopName}</strong><br>Passenger Count: ${update.count}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
