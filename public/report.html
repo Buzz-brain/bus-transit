@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Page</title>
+    <link rel="stylesheet" href="report.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <img src="logo.png" alt="Logo" class="logo">
+        <button class="btn btn-signup">Sign Up</button>
+        <button class="btn btn-login">Login</button>
+        <!-- <div class="menu-icon">&#9776;</div> -->
+    </header>
+
+    <main>
+
+        <!-- Header with View Map Button and Time -->
+        <div class="header">
+            <button class="view-map-button">View Map</button>
+            <div class="time-display">12:35 AM</div>
+        </div>
+        
+        <!-- Report Title -->
+        <h1 class="report-title">Report</h1>
+        
+        <!-- Report Table -->
+        <div class="report-table">
+            <div class="table-header">
+                <div>Bus Stop</div>
+            <div>Passenger Count</div>
+            <div>Congestion Status</div>
+            <div>Info</div>
+        </div>
+        <div class="table-row">
+            <div>FUTO Main Gate</div>
+            <div>42</div>
+            <div class="moderate">Moderate</div>
+            <div>Warning: Approaching high passenger count.</div>
+        </div>
+        <div class="table-row">
+            <div>FUTO Junction</div>
+            <div>15</div>
+            <div class="normal">Normal</div>
+            <div>-</div>
+        </div>
+        <div class="table-row">
+            <div>School of Engineering</div>
+            <div>67</div>
+            <div class="high">High</div>
+            <div>Alert: High congestion, consider rerouting.</div>
+        </div>
+        <div class="table-row">
+            <div>Old Senate Building</div>
+            <div>59</div>
+            <div class="high">High</div>
+            <div>Alert: High congestion, consider rerouting.</div>
+        </div>
+        <div class="table-row">
+            <div>Hostel Bus Stop</div>
+            <div>15</div>
+            <div class="normal">Normal</div>
+            <div>-</div>
+        </div>
+        <div class="table-row">
+            <div>FUTO North Gate</div>
+            <div>42</div>
+            <div class="moderate">Moderate</div>
+            <div>Warning: Approaching high passenger count.</div>
+        </div>
+    </div>
+</main>
+<script>
+    const viewMapBtn = document.getElementsByClassName("view-map-button");
+        for(i=0; i<viewMapBtn.length; i++) {
+            viewMapBtn[i].addEventListener("click", () => {
+            window.location.href = "/map.html";
+            })
+        }
+</script>
+    
+</body>
+</html>
