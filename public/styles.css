@@ -23,6 +23,7 @@ body {
 .logo {
     width: 40px;
     margin-right: auto;
+    cursor: pointer;
 }
 
 .btn {

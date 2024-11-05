@@ -22,10 +22,7 @@
             <h1>Login</h1>
             <p>Welcome back! Please log in to access your account.</p>
             
-            <form class="login-form">
-                <label for="bus-number">Bus Number</label>
-                <input type="text" id="bus-number" placeholder="Enter your Bus Number">
-                
+            <form class="login-form" id="login-form">
                 <label for="email">Email</label>
                 <input type="email" id="email" placeholder="Enter your Email">
                 
@@ -61,20 +58,7 @@
         </div>
     </section>
     <script>
-        const btnSignup = document.getElementsByClassName("btn-signup");
-        for(i=0; i<btnSignup.length; i++) {
-            btnSignup[i].addEventListener("click", () => {
-            window.location.href = "/signup.html";
-            })
-        }
-        const btnLogin = document.getElementsByClassName("btn-login");
-
-        for(i=0; i<btnLogin.length; i++) {
-            btnLogin[i].addEventListener("click", () => {
-            window.location.href = "/login.html";
-            })
-        }
-        document.getElementById("loginForm").onsubmit = async (e) => {
+        document.getElementById("login-form").onsubmit = async (e) => {
             e.preventDefault();
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -96,6 +80,8 @@
             }
         };
     </script>
+    <script src="auth.js"></script>
+
 
 </body>
 </html>
