@@ -97,7 +97,7 @@ body {
     font-size: 14px;
 }
 
-.password-container {
+.password-container, .cPassword-container {
     position: relative;
     margin-bottom: 10px;
 }
@@ -105,7 +105,7 @@ body {
 .show-password {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
     cursor: pointer;
 }

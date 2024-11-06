@@ -3,14 +3,15 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
-const User = require('./models/User');  // Assume a User model for MongoDB
+const User = require('./models/User');
+require('dotenv').config();
 
-// Secret key for JWT (store this in environment variables for production)
-const JWT_SECRET = "your_secret_key";
 
-// Register a new driver
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Register a new user
 exports.register = async (req, res) => {
-    const { busNumber, email, password } = req.body;
+    const { email, username, password } = req.body;
 
     // Validate input
     const errors = validationResult(req);
@@ -19,8 +20,17 @@ exports.register = async (req, res) => {
     }
 
     try {
+        // Check if the email already exists
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ message: "User already exists" });
+        }
+
+        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ busNumber, email, password: hashedPassword });
+
+        // Create and save the new user
+        const newUser = new User({ email, username, password: hashedPassword });
         await newUser.save();
 
         res.status(201).json({ message: "Registration successful" });
@@ -30,25 +40,26 @@ exports.register = async (req, res) => {
     }
 };
 
-// Login driver
+// Login user
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: "User not found" });
+            return res.status(400).json({ message: "User with this email does not exist." });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: "Invalid password" });
+            return res.status(400).json({ message: "Incorrect password. Please try again." });
         }
 
         const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token, user: { id: user._id, busNumber: user.busNumber, email: user.email } });
+        res.json({ token, user: { id: user._id, username: user.username, email: user.email } });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ message: "Internal server error. Please try again later." });
     }
 };
+

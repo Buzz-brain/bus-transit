@@ -1,15 +1,15 @@
-// authRoutes.js
+// routes/authRoutes.js
 
 const express = require('express');
 const { check } = require('express-validator');
-const authController = require('./authController');
+const authController = require('../authController');
 
 const router = express.Router();
 
-router.post('/register', [
-    check('busNumber').not().isEmpty().withMessage('Bus number is required'),
+router.post('/signup', [
     check('email').isEmail().withMessage('Valid email is required'),
-    check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
+    check('username').not().isEmpty().withMessage('Username is required'),
+    check('password').isLength({ min: 4 }).withMessage('Password must be at least 4 characters'),
 ], authController.register);
 
 router.post('/login', [

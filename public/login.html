@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
     <!-- Navbar -->
     <header class="navbar">
-        <img src="logo.png" alt="Logo" class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo">
         <button class="btn btn-signup">Sign Up</button>
         <button class="btn btn-login">Login</button>
         <!-- <div class="menu-icon">&#9776;</div> -->
@@ -39,18 +39,7 @@
                     </label>
                     <a href="#" class="forgot-password">Forgot Password?</a>
                 </div>
-                
-                
                 <button type="submit" class="btn btnLogin">Login</button>
-                
-                <!-- <div class="divider">
-                    <span>OR</span>
-                </div> -->
-                
-                <!-- <button type="button" class="btn btn-google"> 
-                    <img src="google-logo.png" alt="Google Logo"> Login with Google
-                </button> -->
-                
                 <p class="signup-link">
                     Don't have an account? <a href="#">Sign Up</a>
                 </p>
@@ -74,13 +63,25 @@
                 localStorage.setItem("token", data.token);
                 alert("Login successful!");
                 // Redirect to dashboard
-                window.location.href = "/dashboard.html";
+                window.location.href = "/report.html";
             } else {
                 alert("Login failed: " + data.message);
             }
         };
+        // <!-- Password visibility toggle -->
+        document.querySelector(".show-password").addEventListener("click", function() {
+            const passwordInput = document.getElementById("password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                this.textContent = "🙈"; // Change icon to closed eye
+            } else {
+                passwordInput.type = "password";
+                this.textContent = "👁️"; // Change icon to open eye
+            }
+        });
+
     </script>
-    <script src="auth.js"></script>
+    <script src="js/authForm.js"></script>
 
 
 </body>

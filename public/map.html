@@ -6,12 +6,12 @@
     <title>Map Page</title>
         <!-- Link to Leaflet CSS -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="map.css">
+    <link rel="stylesheet" href="css/map.css">
 </head>
 <body>
         <!-- Navbar -->
         <header class="navbar">
-            <img src="logo.png" alt="Logo" class="logo">
+            <img src="images/logo.png" alt="Logo" class="logo">
             <button class="btn btn-signup">Sign Up</button>
             <button class="btn btn-login">Login</button>
             <!-- <div class="menu-icon">&#9776;</div> -->
@@ -109,25 +109,25 @@
         // Listen for passenger count updates
         socket.on("updateCount", (data) => {
             // Update your dashboard with the received count
-            data.forEach(update => {
-                const marker = markers.find(m => m.stopName === update.stopName);
+            data.forEach(data => {
+                const marker = markers.find(m => m.stopName === data.stopName);
 
-                console.log('Received update count:', update.count, update.stopName);
+                console.log('Received data count:', data.count, data.stopName);
 
                 if (marker) {
                     // Update color based on count
-                    const color = update.count > 20 ? "red" : update.count > 10 ? "yellow" : "green";
+                    const color = data.count > 20 ? "red" : data.count > 10 ? "yellow" : "green";
                     marker.setIcon(L.divIcon({
                         className: `marker-icon-${color}`,
                         html: `<div style="background-color: ${color}; width: 20px; height: 20px; border-radius: 50%;"></div>`
                     }));
                     // Update tooltip content to reflect new passenger count
-                    marker.setTooltipContent(`<strong>${update.stopName}</strong><br>Passenger Count: ${update.count}`);
+                    marker.setTooltipContent(`<strong>${data.stopName}</strong><br>Passenger Count: ${data.count}`);
                 }
             });
         });
     </script>
-    <script src="auth.js"></script>
+    <script src="js/authForm.js"></script>
 
 </body>
 </html>

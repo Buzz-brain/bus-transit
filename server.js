@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const http = require('http');
 const socketIo = require('socket.io');
-const authRoutes = require('./authRoutes');
+const authRoutes = require('./routes/authRoutes');
 require('dotenv').config();
 
 // Initialize app and server
@@ -15,7 +15,7 @@ const io = socketIo(server);
 // MongoDB setup
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+  .catch(err => console.log('Database connection error:', err));
 
 // Serve static files
 app.use(express.static('public'));
@@ -28,8 +28,24 @@ app.use('/api/auth', authRoutes);
 
 let passengerCounts = []; // Store counts temporarily for periodic saving
 
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  if (!token) {
+      return next(new Error("Authentication error"));
+  }
+
+  try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      socket.user = decoded;
+      next();
+  } catch (err) {
+      return next(new Error("Invalid token"));
+  }
+});
+
+
 io.sockets.on('connection', (socket) => {
-  console.log('New client connected');
+  console.log('New authenticated client connected:', socket.user.id);
 
   // Listen for passenger count from client
   socket.on('passengerCount', (data) => {
@@ -42,17 +58,14 @@ io.sockets.on('connection', (socket) => {
     // io.emit('updateCount', { count });
 
     // Server-side
-  setInterval(() => {
-    const passengerData = [
-      { stopName: "Eziobodo", count: Math.floor(Math.random() * 30) },
-      { stopName: "Ihiagwa", count },
-      { stopName: "Umuchima", count: Math.floor(Math.random() * 10)  },
-      // Add more bus stops with coordinates
-    ];
-    io.emit("updateCount", passengerData);
-  }, 5000);
+  const passengerData = [
+    { stopName: "Eziobodo", count: Math.floor(Math.random() * 30) },
+    { stopName: "Ihiagwa", count },
+    { stopName: "Umuchima", count: Math.floor(Math.random() * 10)  },
+    // Add more bus stops with coordinates
+  ];
 
-
+  io.emit("updateCount", passengerData);
 
     // Store count in memory for periodic database storage
     passengerCounts.push({ timestamp: new Date(), count });
