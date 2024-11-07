@@ -22,6 +22,29 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script src="js/script.js"></script>
+    <!-- <script>
+        // Check if Geolocation is supported
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            // Get latitude and longitude
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            
+            // Display coordinates
+            console.log("Latitude:", latitude);
+            console.log("Longitude:", longitude);
+        },
+        (error) => {
+            // Handle error cases
+            console.error("Error getting location:", error);
+        }
+    );
+} else {
+    console.log("Geolocation is not supported by this browser.");
+}
+
+    </script> -->
 </body>
 
 </html>
