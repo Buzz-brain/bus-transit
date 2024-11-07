@@ -17,15 +17,14 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('Database connection error:', err));
 
-// Use the auth routes
-app.use('https://bus-transit-phi.vercel.app/api/auth', authRoutes);
-
 // Serve static files
 app.use(express.static('public'));
 
 // Import PassengerCount model
 const PassengerCount = require('./models/PassengerCount');
 
+// Use the auth routes
+app.use('https://bus-transit-phi.vercel.app/api/auth', authRoutes);
 
 let passengerCounts = []; // Store counts temporarily for periodic saving
 
