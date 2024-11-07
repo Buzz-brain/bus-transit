@@ -74,7 +74,7 @@
                 return;
             }
 
-            const response = await fetch("/api/auth/signup", {
+            const response = await fetch("https://bus-transit-phi.vercel.app/api/auth/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, username, password })
