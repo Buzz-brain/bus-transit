@@ -24,28 +24,28 @@ app.use(express.static('public'));
 const PassengerCount = require('./models/PassengerCount');
 
 // Use the auth routes
-app.use('https://bus-transit-phi.vercel.app/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 
 let passengerCounts = []; // Store counts temporarily for periodic saving
 
-io.use((socket, next) => {
-  const token = socket.handshake.auth.token;
-  if (!token) {
-      return next(new Error("Authentication error"));
-  }
+// io.use((socket, next) => {
+//   const token = socket.handshake.auth.token;
+//   if (!token) {
+//       return next(new Error("Authentication error"));
+//   }
 
-  try {
-      const decoded = jwt.verify(token, JWT_SECRET);
-      socket.user = decoded;
-      next();
-  } catch (err) {
-      return next(new Error("Invalid token"));
-  }
-});
+//   try {
+//       const decoded = jwt.verify(token, JWT_SECRET);
+//       socket.user = decoded;
+//       next();
+//   } catch (err) {
+//       return next(new Error("Invalid token"));
+//   }
+// });
 
 
 io.sockets.on('connection', (socket) => {
-  console.log('New authenticated client connected:', socket.user.id);
+  console.log('New authenticated client connected:', socket.id);
 
   // Listen for passenger count from client
   socket.on('passengerCount', (data) => {

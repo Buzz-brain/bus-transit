@@ -56,16 +56,16 @@
         // Set initial map center coordinates (longitude and latitude)
         const longitude = -74.006; // Replace with actual longitude
         const latitude = 40.7128;  // Replace with actual latitude
-        // const longitude1 = -74.306; 
-        // const latitude1 = 40.8328;
-        const latitude1 = 5.372182; 
-        const longitude1 = 7.006284;
+        const longitude1 = -74.306; 
+        const latitude1 = 40.8328;
+        // const latitude1 = 5.372182; 
+        // const longitude1 = 7.006284;
         const longitude2 = -73.586; // Approximately 1 mile west
         const latitude2 = 40.6928; // Approximately 1 mile south
 
 
         // Initialize map
-        const map = L.map('map').setView([latitude1, longitude1], 10); // Replace latitude and longitude with initial center coordinates
+        const map = L.map('map').setView([latitude, longitude], 10); // Replace latitude and longitude with initial center coordinates
 
         // Load and display OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

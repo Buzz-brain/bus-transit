@@ -80,7 +80,7 @@ async function detectPeople() {
     
     // Emit real-time passenger count to server
     socket.emit("passengerCount", { count: peopleCount });
-    // console.log("People count:", peopleCount);
+    console.log("People count:", peopleCount);
 
   } catch (error) {
     console.error("Error in detectPeople():", error);
